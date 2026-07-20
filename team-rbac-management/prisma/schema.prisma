@@ -1,0 +1,36 @@
+generator client { 
+   provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+}
+model User{
+    id       String  @id @default(cuid())
+    email    String  @unique
+    password String
+    name     String
+    role     Role @default(USER)
+    teamId   String?
+    Team     Team? @relation(fields: [teamId], references: [id], onDelete: SetNull)
+
+    //timestamp
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    //indexes
+    @@index([email])
+    @@index([role])
+    @@index([teamId])
+
+    //map
+    @@map("users")
+}
+
+enum Role {
+    ADMIN
+    MANAGER
+    USER 
+    GUEST
+}

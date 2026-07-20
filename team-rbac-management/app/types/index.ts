@@ -11,7 +11,7 @@ export interface User {
     email: string,
     role: Role,
     teamId?: string,
-    team: Temp,
+    team: Team,
     createdAt: Date,
     updatedAt: Date,
 }
