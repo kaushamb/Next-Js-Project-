@@ -11,9 +11,9 @@ model User{
     email    String  @unique
     password String
     name     String
-    role     Role @default(USER)
+    role     Role    @default(USER)
     teamId   String?
-    Team     Team? @relation(fields: [teamId], references: [id], onDelete: SetNull)
+    Team     Team?   @relation(fields: [teamId], references: [id], onDelete: SetNull)
 
     //timestamp
     createdAt DateTime @default(now())
@@ -26,6 +26,21 @@ model User{
 
     //map
     @@map("users")
+}
+
+model Team{
+    id          String  @id @default(cuid())
+    name        String  @unique
+    description String?
+    code        String  @unique
+    members     User[]
+
+    //timestamp
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    //map
+    @@map("teams")
 }
 
 enum Role {
