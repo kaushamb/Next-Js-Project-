@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:generate":"npx prisma generate",
-    "db:push":"npx prisma db push "
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push ",
+    "db:seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^7.8.0",
