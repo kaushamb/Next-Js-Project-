@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { PassThrough } from "stream";
 import { prisma } from "./db";
-import { User } from "../types";
+import { User, Role } from "../types";
 
 const JWT_SECRET= process.env.JWT_SECRET_KEY!;
 
@@ -41,3 +41,18 @@ try{
    return null;
 }
 };
+
+export const CheckUserPermission =(
+   user: User,
+   requiredRole: Role
+): boolean=>{
+      const roleHierarchy= {
+         [Role.GUEST]:0,
+         [Role.USER]:1,
+         [Role.MANAGER]:2,
+         [Role.ADMIN]:3
+      };
+
+      return roleHierarchy[user.role] >= roleHierarchy[requiredRole]
+}
+
