@@ -1,5 +1,6 @@
 import { generateToken, hashPassword } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/db";
+// import { prisma } from "";
 import { Role } from "@/app/types";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,7 +10,7 @@ export async function POST(request: NextRequest) {
     //validate required fields
 
     if (!name || !email || !password) {
-      return NextRequest.json(
+      return NextResponse.json(
         {
           error: "Name, email & password are required or not valid",
         },
@@ -62,8 +63,8 @@ export async function POST(request: NextRequest) {
             role,
             teamId
         },
-        includes:{
-            team:true
+        include:{
+            team: true
         }
     });
   
