@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import { PassThrough } from "stream";
 import { prisma } from "./db";
 import { User, Role } from "../types";
 
