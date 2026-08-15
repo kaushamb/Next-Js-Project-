@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { checkDataBaseConnection } from "@/app/lib/db";
 
-export async function get(){
+export async function GET(){
     const isConnected = await checkDataBaseConnection();
     if(!isConnected){
         return NextResponse.json(
@@ -17,6 +17,6 @@ export async function get(){
                 status:"ok",
                 message:"Database connected successfully",
             },
-            {status:503}
+            {status:200}
         );
 }
