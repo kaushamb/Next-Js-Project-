@@ -23,13 +23,16 @@ export async function GET(request: NextRequest) {
 
     // Build where clause based on user role
     const where: Prisma.UserWhereInput = {};
-
+    console.log("11")
     if(user.role === Role.ADMIN){
+      console.log("22")
         //Admin can see all Users
     }else if(user.role === Role.MANAGER){
+      console.log("33")
         // managers can see users in their team and cross team users but not cross team managers
         where.OR = [{teamId : user.teamId},{role : Role.USER}]
     }else if(user.role === Role.USER){
+      console.log("44")
         //regular user can only see their team
         where.teamId = user.teamId;
         where.role = { not : Role.ADMIN}
@@ -37,10 +40,12 @@ export async function GET(request: NextRequest) {
     
     // Additional filters
     if(teamId){
+      console.log("55")
         where.teamId = teamId;
     }
     if(role){
-        // where.role = role;
+      console.log("66")
+      where.role = role as Role;
     }
    
     const users = await prisma.user.findMany({
