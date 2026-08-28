@@ -54,7 +54,7 @@ class ApiClient {
     }
 
     async getCurrentUser(){
-        return this.request("/api/auth/logout")
+        return this.request("/api/auth/me")
     }
 
     //User Methods 
