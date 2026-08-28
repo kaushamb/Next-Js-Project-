@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AuthProvider from "./provider/authProvider";
 
 export const metadata: Metadata = {
   title: "Team Access Control",
@@ -15,7 +16,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-950 text-slate">{children}</body>
+      <body className="min-h-screen bg-slate-950 text-slate">
+        <AuthProvider>{children}</AuthProvider></body>
     </html>
   );
 }
